@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Insert Employees</title>
+    <style>
+            body{
+                background-color: rgb(234, 241, 241);
+                width: 50%;
+                border: 2px solid purple;
+                margin: 33px auto; 
+            }
+
+            input[type=text], select {
+                width: 100%;
+                padding: 12px 20px;
+                margin: 8px 0;
+                display: inline-block;
+                border: 1px solid #ccc;
+                border-radius: 4px;
+                box-sizing: border-box;
+              }
+            
+              select {
+                  width: 50%;
+              }
+              
+            button {
+                width: 100%;
+                background-color: #4CAF50;
+                color: white;
+                padding: 14px 20px;
+                margin: 8px 0;
+                border: none;
+                border-radius: 4px;
+                cursor: pointer;
+            }
+              
+            button :hover {
+                background-color: #45a049;
+            }
+            
+            div {
+                border-radius: 5px;
+                background-color: #f2f2f2;
+                padding: 20px;
+            }
+
+    </style>
+    <script>
+            function viewEmployees() {
+                location.replace("http://localhost:5000/viewEmployees")
+            }
+
+            function ajaxpost () {
+                var data = new FormData();
+                data.append("first_name", document.getElementById("first_name").value);
+                data.append("last_name", document.getElementById("last_name").value);
+                data.append("gender", document.getElementById("gender").value);
+                data.append("employed", document.getElementById("employed").value);
+                data.append("doj", document.getElementById("doj").value);
+               
+                var xhr = new XMLHttpRequest();
+                xhr.open('POST', "/insertEmployees");
+                xhr.onload = function () {
+                  if (xhr.status != 200) {
+                    alert("SERVER ERROR");
+                  } else {
+                    alert(xhr.response);
+                    document.getElementById("employeeForm").reset();
+                  }
+                };
+                xhr.send(data);
+                return false;
+              }
+
+    </script>
+</head>
+<body>
+<div>
+    <form id="employeeForm" onsubmit='return ajaxpost()'>
+        <label>First Name: </label>
+        <input id='first_name' type="text" name="first_name" required>
+        <label>Last Name: </label>
+        <input id='last_name' type="text" name="last_name" required>
+
+        <label>Gender: </label>
+        <input type="radio" id="gender" name="gender" value="Male" required>
+        <label for="male">Male</label>
+        <input type="radio" id="gender" name="gender" value="Female" required>
+        <label for="female">Female</label>
+        <input type="radio" id="gender" name="gender" value="Other" required>
+        <label for="other">Other</label><br>
+        <label>Employed:</label>
+        <select id="employed" name="employed" , required>
+            <option value="" disabled selected>Select your option</option>
+            <option value="Yes">Yes</option>
+            <option value="No">No</option>
+        </select>
+        <p>Date of Joining (DOJ): <input type="date" , id="doj" , name="doj" , required></p>
+        <button type="submit">Add Employee</button>
+        <button type="button" , onclick="viewEmployees()">View All Employees</button>
+    </form>
+</div>
+</body>
+</html>

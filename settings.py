@@ -1,0 +1,6 @@
+SERVER_PORT = 5000
+
+MONGO_DB_IP = 'localhost'
+MONGO_DB_PORT = 27017
+MONGO_DB_DATABASE = 'database'
+MONGO_DB_COLLECTION = 'new_data'
