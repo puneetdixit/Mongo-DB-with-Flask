@@ -27,7 +27,7 @@ class MongoDBManager(object):
 
     def select_or_create_collection(self, database, collection):
         """
-        This function is used to select a collection from a particular data. If collection is not present then it will
+        This function is used to select a collection from a particular database. If collection is not present then it will
         create.
         :param database:
         :param collection:
